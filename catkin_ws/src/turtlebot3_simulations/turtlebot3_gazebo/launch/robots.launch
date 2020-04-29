@@ -1,0 +1,25 @@
+<launch>
+
+  <!-- BEGIN ROBOT 1-->
+  <group ns="robot1">
+    <param name="tf_prefix" value="robot1_tf" />
+    <include file="$(find turtlebot3_gazebo)/launch/one_robot.launch" >
+      <arg name="x_pos" value="1" />
+      <arg name="y_pos" value="1" />
+      <arg name="z_pos" value="0" />
+    </include>
+    <node name="spawn_urdf1" pkg="gazebo_ros" type="spawn_model" args="-urdf -model turtlebot3_burger -x 1 -y 1 -z 0 -param robot_description" />
+  </group>
+
+  <!-- BEGIN ROBOT 2-->
+  <group ns="robot2">
+    <param name="tf_prefix" value="robot2_tf" />
+    <include file="$(find turtlebot3_gazebo)/launch/one_robot.launch" >
+      <arg name="x_pos" value="-1" />
+      <arg name="y_pos" value="-1" />
+      <arg name="z_pos" value="0" />
+    </include>
+    <node name="spawn_urdf2" pkg="gazebo_ros" type="spawn_model" args="-urdf -model turtlebot3_waffle_pi -x -1 -y -1 -z 0 -param robot_description" />
+  </group>
+
+</launch>
