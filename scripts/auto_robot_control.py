@@ -12,7 +12,7 @@ import cv2
 import numpy as np
 import argparse
 
-
+ball_pos = [15,22]
 
 turtle_pose = None
 rel_x_pos = None
@@ -86,6 +86,23 @@ def main():
                 vel_msg.angular.x = 0
                 vel_msg.angular.y = 0
                 while(rel_x_pos):
+                    thresh = 0.2
+                    turtle_x = turtle_pose.pose.pose.position.x
+                    turtle_y = turtle_pose.pose.pose.position.y
+                    if (turtle_x > ball_pos[0] - thresh
+                            and turtle_x < ball_pos[0] + thresh
+                            and turtle_y > ball_pos[1] - thresh
+                            and turtle_y < ball_pos[1] + thresh):
+                        print("Ball reached")
+                        vel_msg = Twist()
+                        vel_msg.linear.y = 0
+                        vel_msg.linear.z = 0
+                        vel_msg.linear.x = 0
+                        vel_msg.angular.x = 0
+                        vel_msg.angular.y = 0
+                        vel_msg.angular.z = 0
+                        velo_pub.publish(vel_msg)
+                        return
                     print(rel_x_pos)
                     if(rel_x_pos > 0.1 or rel_x_pos < -0.1):
                         while(rel_x_pos > 0.1) :
