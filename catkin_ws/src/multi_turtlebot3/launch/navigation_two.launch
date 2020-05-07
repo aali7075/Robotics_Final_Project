@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <launch>
   <!-- Command Line Arguments -->
-  <arg name="tb3_0_init_x" default="0.5"/>
-  <arg name="tb3_0_init_y" default="0.5"/>
-  <arg name="tb3_0_init_a" default="0.0"/>
+  <arg name="tb3_0_init_x" default="12"/>
+  <arg name="tb3_0_init_y" default="11.5"/>
+  <arg name="tb3_0_init_a" default="1.5707"/>
 
-  <arg name="tb3_1_init_x" default="-0.5"/>
-  <arg name="tb3_1_init_y" default="0.5"/>
-  <arg name="tb3_1_init_a" default="0.0"/>
+  <arg name="tb3_1_init_x" default="12"/>
+  <arg name="tb3_1_init_y" default="10.5"/>
+  <arg name="tb3_1_init_a" default="1.5707"/>
   
   <!-- Default value for location of map config file -->
   <arg name="map_file" default="$(find turtlebot3_navigation)/maps/map.yaml"/>
