@@ -12,7 +12,7 @@ import cv2
 import numpy as np
 import argparse
 
-ball_pos = [14.5,21]
+ball_pos = [8.8,-1.7]
 
 turtle_pose = None
 rel_x_pos = None
@@ -86,9 +86,10 @@ def main():
                 vel_msg.angular.x = 0
                 vel_msg.angular.y = 0
                 while(rel_x_pos):
-                    thresh = 0.2
+                    thresh = .75
                     turtle_x = turtle_pose.pose.pose.position.x
                     turtle_y = turtle_pose.pose.pose.position.y
+                    print(turtle_x,turtle_y)
                     if (turtle_x > ball_pos[0] - thresh
                             and turtle_x < ball_pos[0] + thresh
                             and turtle_y > ball_pos[1] - thresh
@@ -107,11 +108,13 @@ def main():
                     if(rel_x_pos > 0.1 or rel_x_pos < -0.1):
                         while(rel_x_pos > 0.1) :
                             print("Rotating clockwise")
+                            print(turtle_x,turtle_y)
                             vel_msg.angular.z = -0.1
                             vel_msg.linear.x = 0
                             velo_pub.publish(vel_msg)
                         while(rel_x_pos < -0.1):
                             print("Rotating counter clockwise")
+                            print(turtle_x,turtle_y)
                             vel_msg.angular.z = 0.1
                             vel_msg.linear.x = 0
                             velo_pub.publish(vel_msg)
