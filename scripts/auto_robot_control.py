@@ -41,7 +41,7 @@ def main():
     global rel_x_pos
     global goal_status
 
-    print("working")
+    # print("working")
     # p = PoseStamped()
     # p.header.frame_id = "map"
     # p.header.stamp = rospy.Time.now()
@@ -62,11 +62,11 @@ def main():
 
         # goal_pub.publish(p)
         client.send_goal(goal)
-        print("First goal published")
+        # print("First goal published")
 
         while(turtle_pose.pose.pose.position.x!=current_goal[0] and turtle_pose.pose.pose.position.y!=current_goal[1] and turtle_pose.pose.pose.orientation.w!=current_goal):
             if rel_x_pos:
-                print("ball spotted")
+                # print("ball spotted")
                 #stop turtlebot
                 #doesnt fucking work
                 # p.header.stamp = rospy.Time.now()
@@ -77,8 +77,9 @@ def main():
                 # rospy.sleep(30)
 
                 c = GoalID()
-                cancel_pub.publish(c)
-                print("TB OG navgoal stopped")
+                client.cancel_goal()
+                # cancel_pub.publish(c)
+                # print("TB OG navgoal stopped")
 
                 vel_msg = Twist()
                 vel_msg.linear.y = 0
@@ -86,15 +87,15 @@ def main():
                 vel_msg.angular.x = 0
                 vel_msg.angular.y = 0
                 while(rel_x_pos):
-                    thresh = .75
+                    thresh = .3
                     turtle_x = turtle_pose.pose.pose.position.x
                     turtle_y = turtle_pose.pose.pose.position.y
-                    print(turtle_x,turtle_y)
+                    # print(turtle_x,turtle_y)
                     if (turtle_x > ball_pos[0] - thresh
                             and turtle_x < ball_pos[0] + thresh
                             and turtle_y > ball_pos[1] - thresh
                             and turtle_y < ball_pos[1] + thresh):
-                        print("Ball reached")
+                        # print("Ball reached")
                         vel_msg = Twist()
                         vel_msg.linear.y = 0
                         vel_msg.linear.z = 0
@@ -104,22 +105,22 @@ def main():
                         vel_msg.angular.z = 0
                         velo_pub.publish(vel_msg)
                         return
-                    print(rel_x_pos)
+                    # print(rel_x_pos)
                     if(rel_x_pos > 0.1 or rel_x_pos < -0.1):
                         while(rel_x_pos > 0.1) :
-                            print("Rotating clockwise")
-                            print(turtle_x,turtle_y)
-                            vel_msg.angular.z = -0.1
+                            # print("Rotating clockwise")
+                            # print(turtle_x,turtle_y)
+                            vel_msg.angular.z = -0.05
                             vel_msg.linear.x = 0
                             velo_pub.publish(vel_msg)
                         while(rel_x_pos < -0.1):
-                            print("Rotating counter clockwise")
-                            print(turtle_x,turtle_y)
-                            vel_msg.angular.z = 0.1
+                            # print("Rotating counter clockwise")
+                            # print(turtle_x,turtle_y)
+                            vel_msg.angular.z = 0.05
                             vel_msg.linear.x = 0
                             velo_pub.publish(vel_msg)
                     else:
-                        print("Going Straight")
+                        # print("Going Straight")
                         vel_msg.angular.z = 0
                         vel_msg.linear.x = .5
                         velo_pub.publish(vel_msg)

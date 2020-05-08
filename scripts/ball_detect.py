@@ -74,7 +74,7 @@ def callback(data):
 
         #publish ball point relative to center negative for left, positive for right - scaled to one
         x,y = get_relative_pos(cv_image,keypoints)
-        print("publishing: ",x,y)
+        # print("publishing: ",x,y)
         blob_msg = Point()
         blob_msg.x = x
         blob_msg.y = y
@@ -82,9 +82,9 @@ def callback(data):
 
     #mask and image with keypoints
     im_with_keypoints = cv2.drawKeypoints(cv_image, keypoints, np.array([]), (0,255,0), cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
-    cv2.imshow("mask", rev_mask)
-    cv2.imshow("blob", im_with_keypoints)
-    cv2.waitKey(2)
+    # cv2.imshow("mask", rev_mask)
+    # cv2.imshow("blob", im_with_keypoints)
+    # cv2.waitKey(1)
 
 
 if __name__ == '__main__':
