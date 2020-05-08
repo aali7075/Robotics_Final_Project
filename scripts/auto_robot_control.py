@@ -12,7 +12,7 @@ import cv2
 import numpy as np
 import argparse
 
-ball_pos = [15,22]
+ball_pos = [14.5,21]
 
 turtle_pose = None
 rel_x_pos = None
